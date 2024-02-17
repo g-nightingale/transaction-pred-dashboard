@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/')
+@app.route('/trans-pred-dashboard')
 def index():
 
     # Update data
