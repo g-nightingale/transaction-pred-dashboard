@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+html, body {
+    height: 100%; /* Make sure the body takes up full viewport height */
+    margin: 0; /* Remove default margin */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack children vertically */
+    font-family: 'Monsterrat', sans-serif; /* Use a modern font */
+    background-color: #000000;
+}
+
+h1 {
+    color: #BB86FC;
+    font-weight: normal;
+}
+
+h3 {
+    color: #BB86FC;
+}
+
+body {
+    background-color: #222222;
+}
+
+.main-container {
+    /* Example dimensions, adjust as needed */
+    display: flex;
+    flex-direction: column; 
+    overflow: scroll; 
+    height: 100%;
+    width: 100%; /* Or specific px value */
+    padding: 0px; /* Optional: for some internal spacing */
+    border: 1px solid #5c5c5c;
+    border-radius: 0px; /* Soft edges */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow for better visibility */
+    /* Add any other styling you need for the container */
+    /* background-color:  #E0F7FA; */
+    text-align: center; 
+    background-color: #222222;
+}
+
+.plot-container {
+    display: flex; /* Adjust if you need the plots side by side */
+    flex-direction: column; /* 'row' for side by side, 'column' for stacked */
+    justify-content: center; /* Center horizontally in case of row, vertically for column */
+    align-items: center; /* Center vertically in case of row, horizontally for column */
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto; /* Center the table horizontally */
+}
+th, td {
+    border: 1px solid #333333; /* White borders */
+    text-align: left;
+    padding: 4px;
+    color: #dadada;
+    /* background-color: #555555;  */
+}
+th {
+   /* Slightly lighter grey for headers */
+    /* color: #BB86FC; */
+    background-color: #333333;
+}
+
