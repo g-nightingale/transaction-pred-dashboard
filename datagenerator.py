@@ -10,7 +10,7 @@ class DataGenerator():
     """
     def __init__(self,
                 n_features:int=4,
-                reset_prob:float=0.001) -> None:
+                reset_prob:float=0.01) -> None:
         
         self.n_features = n_features
         self.reset_prob = reset_prob

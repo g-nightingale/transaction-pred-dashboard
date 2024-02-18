@@ -17,11 +17,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from joblib import dump, load
-import time 
+from datetime import datetime
 
 app = Flask(__name__)
-
-
 
 @app.route('/trans-pred-dashboard')
 def index():
@@ -157,10 +155,14 @@ def get_plot_data(df, new_model_flag, df_new_model_dev, rmse_new):
 
     plot_data['model_update_flag'] = 0
     if new_model_flag:
+        # Get the current date and time
+        now = datetime.now()
+        formatted_now = now.strftime('%Y:%m:%d %H:%M:%S')
+
         plot_data['model_update_flag'] = 1
         plot_data['model_update_values'] = {}
         plot_data['model_update_values']['version'] = model_version
-        plot_data['model_update_values']['update_time'] = time.now()
+        plot_data['model_update_values']['update_time'] = formatted_now
         plot_data['model_update_values']['rmse'] = rmse_new
     
     return plot_data
