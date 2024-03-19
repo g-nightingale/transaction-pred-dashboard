@@ -90,14 +90,7 @@ def score_data(df):
     """
     Score data -> this should call an API.
     """
-    print(df.head())
     predictions = get_predictions(df.drop(FEATURES_TO_DROP, axis=1))
-
-    # Score data with the latest model
-    # model = load('model.joblib')
-    # x = df[['x0', 'x1', 'x2', 'x3']]
-    # df['y_pred'] = model.predict(x)
-
     df['y_pred'] = predictions
     return df
 
@@ -106,18 +99,25 @@ def insert_new_data(df):
     Generate, score and insert new data.
     """
     # Insert data into table
-    # with engine.connect() as conn:
-    df.to_sql('transactions', con=engine, if_exists='append', index=False)
+    with engine.connect() as conn:
+        # Begin a transaction
+        with conn.begin():
+            df.to_sql('transactions', con=engine, if_exists='append', index=False)
 
 def retrieve_data():
     """
     Retrieve data.
     """
-    # Build a select statement
-    select_statement = select(my_table)
-    # with engine.connect() as conn:
-    df = pd.read_sql(select_statement, engine)
 
+    # Use a context manager to ensure the connection is closed after use
+    with engine.connect() as conn:
+        # Begin a transaction
+        with conn.begin():
+            # Build a select statement
+            select_statement = select(my_table)
+            # Execute the query and fetch the result into a DataFrame
+            df = pd.read_sql(select_statement, conn)
+            
     return df
 
 def delete_older_records(limit=50):

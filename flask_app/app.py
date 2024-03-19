@@ -12,6 +12,8 @@ sys.path.append(parent_dir)
 # Now you can import the module from the parent directory
 from db_utils import retrieve_data
 
+NA_REPLACE_VALUE = -1.0
+
 app = Flask(__name__)
 
 @app.route('/trans-pred-dashboard')
@@ -20,6 +22,7 @@ def index():
     # Get data from the db
     df = retrieve_data()
     df['timestamp'] = df['timestamp'].apply(lambda x: x.strftime('%d%m %H:%M:%S'))
+    df.fillna(NA_REPLACE_VALUE, inplace=True)
 
     model_info = get_model_info()
 
@@ -47,6 +50,7 @@ def get_new_data():
     # Generate new data
     df = retrieve_data()
     df['timestamp'] = df['timestamp'].apply(lambda x: x.strftime('%d%m %H:%M:%S'))
+    df.fillna(NA_REPLACE_VALUE, inplace=True)
 
     # Check for retraining
     check_retrain(df)
