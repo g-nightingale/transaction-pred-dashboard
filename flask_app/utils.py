@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 import os
 import requests
 
-RMSE_RETRAIN_THRESHOLD = 50.0
+RMSE_RETRAIN_THRESHOLD = 40.0
 N_RECENT_OBS = 1000
 ML_INFO_API_URL = 'http://localhost:5002/get-model-info'
 ML_RETRAIN_API_URL = 'http://localhost:5002/retrain'
@@ -66,7 +66,9 @@ def check_retrain(df) -> None:
     rmse_current = np.power(mean_squared_error(y, preds), 0.5)
 
     # If RMSE is too high, retrain model
+    print(f'current RMSE: {rmse_current}')
     if rmse_current > RMSE_RETRAIN_THRESHOLD:
+        print(f'retraining...')
         make_retrain_request()
         
 def create_plot_data(df, model_info) -> defaultdict:
@@ -86,13 +88,12 @@ def create_plot_data(df, model_info) -> defaultdict:
         'y': [y1, y2, y3]
     }
 
-    rmse = df.groupby('timestamp').apply(lambda x: np.power(mean_squared_error(x['y'], x['y_pred']), 0.5), include_groups=False).reset_index(drop=True)
-    r2 = df.groupby('timestamp').apply(lambda x: r2_score(x['y'], x['y_pred']), include_groups=False).reset_index(drop=True)
-    x = df['timestamp'].unique().tolist()
+    rmse = df.groupby('timestamp').apply(lambda x: np.power(mean_squared_error(x['y'], x['y_pred']), 0.5), include_groups=False).reset_index()
+    r2 = df.groupby('timestamp').apply(lambda x: r2_score(x['y'], x['y_pred']), include_groups=False).reset_index()
 
     plot_data['model_perf'] = {
         'x':[x, x],
-        'y':[rmse.values.tolist(), r2.values.tolist()]
+        'y':[rmse[0].values.tolist(), r2[0].values.tolist()]
     }
 
     p1_1 = df['x0'].iloc[:-N_RECENT_OBS].value_counts().sort_index()
