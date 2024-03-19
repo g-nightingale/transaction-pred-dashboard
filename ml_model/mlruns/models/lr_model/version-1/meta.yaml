@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1710573352479
+current_stage: None
+description: null
+last_updated_timestamp: 1710573352479
+name: lr_model
+run_id: a5c66dc82739402db09978e8e4422da3
+run_link: null
+source: file:///Users/geoffrey.nightingale%40contino.io/Documents/code/transaction-pred-dashboard/ml_model/mlruns/233832446252056684/a5c66dc82739402db09978e8e4422da3/artifacts/linear_regression_model
+status: READY
+status_message: null
+storage_location: file:///Users/geoffrey.nightingale%40contino.io/Documents/code/transaction-pred-dashboard/ml_model/mlruns/233832446252056684/a5c66dc82739402db09978e8e4422da3/artifacts/linear_regression_model
+user_id: null
+version: 1

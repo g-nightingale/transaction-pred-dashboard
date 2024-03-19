@@ -1,0 +1,6 @@
+psutil==5.9.8
+numpy==1.26.3
+pandas==2.1.4 # Bug with 2.2.0 and SQLAlchemy: https://github.com/pandas-dev/pandas/issues/57049
+scikit-learn==1.4.0
+python-dotenv==0.20.0
+sqlalchemy==2.0.28

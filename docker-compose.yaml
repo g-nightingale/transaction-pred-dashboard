@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  ui:
+    build:
+      context: .  
+      dockerfile: ./flask_app/dockerfile
+    environment:
+      - ML_INFO_API_URL=http://ml_model:5002/get-model-info
+      - ML_RETRAIN_API_URL=http://ml_model:5002/retrain
+    ports:
+      - "5000:5000"
+    depends_on:
+      - data_manager
+
+  data_manager:
+    build: ./db
+    environment:
+      - ML_API_URL=http://ml_model:5002/predict
+    depends_on:
+      - ml_model
+    ports:
+      - "5001:8080"
+
+  ml_model:
+    build: 
+      context: .  # The path to the new build context
+      dockerfile: ./ml_model/dockerfile  # Optional if your Dockerfile is named 'Dockerfile'
+    ports:
+      - "5002:5002"
+

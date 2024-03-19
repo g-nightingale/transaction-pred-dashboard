@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/geoffrey.nightingale%40contino.io/Documents/code/transaction-pred-dashboard/ml_model/mlruns/233832446252056684/a5c66dc82739402db09978e8e4422da3/artifacts
+end_time: 1710573352497
+entry_point_name: ''
+experiment_id: '233832446252056684'
+lifecycle_stage: active
+run_id: a5c66dc82739402db09978e8e4422da3
+run_name: zealous-croc-314
+run_uuid: a5c66dc82739402db09978e8e4422da3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710573346455
+status: 3
+tags: []
+user_id: geoffrey.nightingale@contino.io

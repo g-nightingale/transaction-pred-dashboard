@@ -7,7 +7,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var updateInterval = 2000; // Update every 2 seconds
+            var updateInterval = 30000; // Update every 30 seconds
         
             function fetchAndUpdateData() {
                 fetch('/get-new-data')
@@ -18,12 +18,10 @@
                         Plotly.restyle('model-perf', new_data.model_perf, [0, 1]);
                         Plotly.restyle('small-plots', new_data.subplots, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
-                        if(new_data.model_update_flag === 1) {
-                            // Update several table cells
-                            document.getElementById('model-version').innerText = new_data.model_update_values.version;
-                            document.getElementById('model-update-time').innerText = new_data.model_update_values.update_time;
-                            document.getElementById('model-rmse').innerText = new_data.model_update_values.rmse;
-                        }
+                        document.getElementById('model-version').innerText = new_data.model_update_values.version;
+                        document.getElementById('model-update-time').innerText = new_data.model_update_values.update_time;
+                        document.getElementById('model-rmse').innerText = new_data.model_update_values.rmse;
+
                     })
                     .catch(error => console.error('Error fetching new data:', error));
             }
@@ -46,12 +44,12 @@
         }
 
         h1 {
-            color: #BB86FC;
+            color: #03C988;
             font-weight: normal;
         }
 
         h3 {
-            color: #BB86FC;
+            color: #dadada;
         }
 
         body {
@@ -102,21 +100,21 @@
 </head>
 <body>
     <div class="main-container">
-        <h1>Fraud Detection Dashboard</h1>
+        <h1>Transaction Prediction Dashboard</h1>
         <h3>Model Information</h3>
         <table id="data-table" lass="table table-striped table-bordered data-table">
             <thead>
                 <tr>
-                    <th>Version</th>
+                    <th>Model Version</th>
                     <th>Last Model Rebuild</th>
                     <th>RMSE</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td id="model-version"> - </td>
-                    <td id="model-update-time"> - </td>
-                    <td id="model-rmse"> - </td>
+                    <td id="model-version"> {{ model_info.model_version }} </td>
+                    <td id="model-update-time"> {{ model_info.training_date_time }} </td>
+                    <td id="model-rmse"> {{ model_info.rmse }} </td>
                 </tr>
             </tbody>
         </table>
@@ -131,6 +129,7 @@
         var main_plot_data = {{ main_plot_json | safe }};
         var model_perf_data = {{ model_perf_json | safe }};
         var small_plots_data = {{ small_plots_json | safe }};
+        var model_info = {{ model_info | safe }};
         
         Plotly.newPlot('main-plot', main_plot_data.data, main_plot_data.layout);
         Plotly.newPlot('model-perf', model_perf_data.data, model_perf_data.layout);

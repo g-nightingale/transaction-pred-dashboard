@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/geoffrey.nightingale%40contino.io/Documents/code/transaction-pred-dashboard/ml_model/mlruns/233832446252056684/466fa9c57e714c57ab253c559ab9476c/artifacts
+end_time: 1710573884149
+entry_point_name: ''
+experiment_id: '233832446252056684'
+lifecycle_stage: active
+run_id: 466fa9c57e714c57ab253c559ab9476c
+run_name: chill-goat-490
+run_uuid: 466fa9c57e714c57ab253c559ab9476c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710573884096
+status: 3
+tags: []
+user_id: geoffrey.nightingale@contino.io

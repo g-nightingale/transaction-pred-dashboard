@@ -1,0 +1,8 @@
+plotly==5.18.0
+flask==3.0.2 
+numpy==1.26.3
+pandas==2.2.1
+scikit-learn==1.4.0 
+python-dotenv==0.20.0
+sqlalchemy==2.0.28
+requests==2.31.0

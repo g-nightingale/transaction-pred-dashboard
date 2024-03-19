@@ -1,0 +1,6 @@
+artifact_location: file:///Users/geoffrey.nightingale%40contino.io/Documents/code/transaction-pred-dashboard/ml_model/mlruns/233832446252056684
+creation_time: 1710573345805
+experiment_id: '233832446252056684'
+last_update_time: 1710573345805
+lifecycle_stage: active
+name: mlflow-lr_model

@@ -1,4 +1,4 @@
-from datagenerator import FraudDataGenerator
+from db.datagenerator import FraudDataGenerator
 import numpy as np
 
 def test_datagen_probs():

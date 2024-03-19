@@ -1,0 +1,49 @@
+# Use the official Apache Airflow image as the base image
+# FROM apache/airflow:2.8.2
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+
+# Install any additional dependencies or tools you need
+# For example, to install a PostgreSQL driver and other dependencies, you can use:
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpq-dev \
+        gcc \
+        python3-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# RUN apt-get install gcc python3-dev -y
+# Install any needed packages specified in requirements.txt
+COPY requirements.txt /requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Airflow using pip
+# Note: Replace "2.2.3" with the version of Airflow you want to install
+RUN pip install "apache-airflow==2.7.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.7.0/constraints-no-providers-3.9.txt"
+
+# Install psycopg2-binary
+RUN pip install psycopg2-binary
+
+# Set the AIRFLOW_HOME environment variable
+# ENV AIRFLOW_HOME=/usr/local/airflow
+
+# Set the environment variable to prevent loading example DAGs
+ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
+# ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres1234@gn-rds.cibphpkdovpw.eu-west-2.rds.amazonaws.com:5432
+
+RUN adduser --disabled-password --gecos "" airflow
+USER airflow
+
+# Copy your DAG files into the container
+COPY --chown=airflow:airflow . /usr/local/airflow/
+COPY --chown=airflow:airflow . /home/airflow/airflow/
+
+WORKDIR /usr/local/airflow/
+
+# Expose port 8080 for the Airflow webserver (I don't think this can be changed)
+EXPOSE 8080
+
+# By default, run the Airflow webserver (you can change this to start the scheduler or other components based on your setup)
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/usr/local/airflow/entrypoint.sh"]
