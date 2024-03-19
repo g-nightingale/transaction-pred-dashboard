@@ -13,7 +13,9 @@ services:
       - data_manager
 
   data_manager:
-    build: ./db
+    build: 
+      context: .
+      dockerfile: ./db/dockerfile
     environment:
       - ML_API_URL=http://ml_model:5002/predict
     depends_on:

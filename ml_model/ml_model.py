@@ -19,7 +19,7 @@ parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../shared_
 sys.path.append(parent_dir)
 
 # Now you can import the module from the parent directory
-from db_utils import my_table, retrieve_data
+from db_utils import retrieve_data
 
 EXPERIMENT_NAME = 'mlflow-lr_model'
 REGISTERED_MODEL_NAME = 'lr_model'

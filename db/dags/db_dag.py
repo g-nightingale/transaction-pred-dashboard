@@ -5,11 +5,11 @@ import sys
 import os
 
 # Hack to use relative imports
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../shared_utils'))
 sys.path.append(parent_dir)
 
 # Now you can import the module from the parent directory
-from rds import generate_and_score_data, delete_older_records
+from db_utils import generate_and_score_data, delete_older_records
 
 MAX_RECORDS = 20000
 

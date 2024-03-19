@@ -102,7 +102,7 @@ def insert_new_data(df):
     with engine.connect() as conn:
         # Begin a transaction
         with conn.begin():
-            df.to_sql('transactions', con=engine, if_exists='append', index=False)
+            df.to_sql('transactions', con=conn, if_exists='append', index=False)
 
 def retrieve_data():
     """

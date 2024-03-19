@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # RUN apt-get install gcc python3-dev -y
 # Install any needed packages specified in requirements.txt
-COPY requirements.txt /requirements.txt
+COPY ./db/requirements.txt /requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -35,10 +35,12 @@ ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 RUN adduser --disabled-password --gecos "" airflow
 USER airflow
 
-# Copy your DAG files into the container
-COPY --chown=airflow:airflow . /usr/local/airflow/
-COPY --chown=airflow:airflow . /home/airflow/airflow/
+# Copy DAG files and utility code into /home/airflow/airflow/
+COPY --chown=airflow:airflow ./db/dags /home/airflow/airflow/dags
+COPY ./shared_utils . /home/airflow/airflow/
 
+# Copy the other files
+COPY --chown=airflow:airflow ./db /usr/local/airflow/
 WORKDIR /usr/local/airflow/
 
 # Expose port 8080 for the Airflow webserver (I don't think this can be changed)
