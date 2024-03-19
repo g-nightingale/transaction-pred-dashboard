@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY ./ml_model /app
 
-# COpy the shared utils folder
+# Copy the shared utils folder
 COPY ./shared_utils .
 
 # Delete model files
