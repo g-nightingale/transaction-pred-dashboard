@@ -21,38 +21,6 @@ sys.path.append(parent_dir)
 # Now you can import the module from the parent directory
 from db_utils import my_table, retrieve_data
 
-# Load environment variables from .env file
-# load_dotenv()
-
-# # Database credentials and connection details
-# USERNAME = os.getenv('USERNAME')
-# PASSWORD = os.getenv('PASSWORD')
-# HOST = os.getenv('HOST')
-# PORT = '5432'  # Default port for PostgreSQL
-# DATABASE = 'gn-rds'
-
-# # Database connection URL
-# DATABASE_URL = f"postgresql+psycopg2://{USERNAME}:{PASSWORD}@{HOST}:{PORT}"
-
-# # Create an engine instance
-# engine = create_engine(DATABASE_URL, echo=True)
-
-# # Define metadata instance
-# metadata = MetaData()
-
-# # Define the table -> need to centralise this somehow
-# my_table = Table('transactions', 
-#                     metadata,
-#                     Column('id', Integer, primary_key=True),
-#                     Column('x0', Float),
-#                     Column('x1', Float),
-#                     Column('x2', Float),
-#                     Column('x3', Float),
-#                     Column('timestamp', DateTime),
-#                     Column('y', Float),
-#                     Column('y_pred', Float)
-#                     )
-
 EXPERIMENT_NAME = 'mlflow-lr_model'
 REGISTERED_MODEL_NAME = 'lr_model'
 MIN_MSE_REDUCTION = -0.1
@@ -215,7 +183,3 @@ def get_model_info():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5002)
-    # Example usage
-    # retrain()
-    # info = get_latest_model_info(REGISTERED_MODEL_NAME)
-    # print(info)

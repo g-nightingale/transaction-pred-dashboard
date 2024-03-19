@@ -42,16 +42,11 @@ def make_retrain_request():
     # Make a POST request to the predict endpoint
     response = requests.post(ml_api_url)
 
-    model_info = None
     # Check if the request was successful
     if response.status_code == 200:
-        # Parse the prediction from the response
-        model_info = response.json()
         print("Success: retrain request succeeded")
     else:
         print("Failed to make retrain request. Status code:", response.status_code, "Response:", response.text)
-
-    return model_info
 
 def check_retrain(df) -> None:
     """

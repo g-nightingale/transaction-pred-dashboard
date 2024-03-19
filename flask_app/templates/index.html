@@ -125,12 +125,12 @@
         </div>
     </div>
     <script>
-        // Render Plotly graphs
         var main_plot_data = {{ main_plot_json | safe }};
         var model_perf_data = {{ model_perf_json | safe }};
         var small_plots_data = {{ small_plots_json | safe }};
         var model_info = {{ model_info | safe }};
         
+        // Render Plotly graphs
         Plotly.newPlot('main-plot', main_plot_data.data, main_plot_data.layout);
         Plotly.newPlot('model-perf', model_perf_data.data, model_perf_data.layout);
         Plotly.newPlot('small-plots', small_plots_data.data, small_plots_data.layout);
